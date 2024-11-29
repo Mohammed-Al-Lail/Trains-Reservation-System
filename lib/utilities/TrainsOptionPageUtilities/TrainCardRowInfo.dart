@@ -27,6 +27,7 @@ class TrainCardRowInfo extends StatelessWidget {
     return  Padding(
       padding: const EdgeInsets.only(left: 5),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
       
           Text(
@@ -34,7 +35,7 @@ class TrainCardRowInfo extends StatelessWidget {
             style: TextStyle(
               color: labelColor,
               fontSize: labelFontSize,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w900,
             ),
           ),
           const SizedBox(width: 5,),
@@ -44,7 +45,7 @@ class TrainCardRowInfo extends StatelessWidget {
             style:  TextStyle(
             fontSize: valueFontSize,
             color: valueColor,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w500,
             ),
           ),
         ],

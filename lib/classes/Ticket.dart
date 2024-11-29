@@ -1,8 +1,11 @@
 class Ticket{
 
   Ticket({ // constructor
-    required this.passengarName,
+    required this.trainId,
+    required this.passengarFname,
+    required this.passengarLname,
     required this.seatClass,
+    required this.seatNumber,
     required this.ticketPrice,
     required this.trainOriginCity,
     required this.trainDestinationCity,
@@ -10,9 +13,11 @@ class Ticket{
 
   });
 // required parameters
-
-  final String passengarName;
+  final int trainId;
+  final String passengarFname;
+  final String passengarLname;
   final String seatClass;
+  final String seatNumber;
   final String ticketPrice;
   final String trainOriginCity;
   final String trainDestinationCity;

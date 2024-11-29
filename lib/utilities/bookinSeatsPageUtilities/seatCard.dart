@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:trains_reservation_app_ics321_project/Services/usersProvider.dart';
 import 'package:trains_reservation_app_ics321_project/classes/Train.dart';
-import 'package:trains_reservation_app_ics321_project/classes/passengar.dart';
 import 'package:trains_reservation_app_ics321_project/classes/seat.dart';
 
 // ignore: must_be_immutable
 class seatCard extends StatefulWidget {
-   seatCard({super.key, required this.train,required this.seat, required this.passengar});
+   seatCard({super.key, required this.train,required this.seat,});
 
   Train train;
   Seat seat;
-  Passengar passengar;
+
   
 
   @override
@@ -42,10 +41,10 @@ class _seatCardState extends State<seatCard> {
                 widget.seat.isClicked=!widget.seat.isClicked!; // change the state of isClicked
               });
               if(widget.seat.isClicked!){// since each seat  will have a defult value for isClicked, which is false, because of that we add (!) at the end, (which mean we sure it will not be null) 
-                myProvider.addSeatToPassengerList(widget.passengar, widget.seat);
+                myProvider.addSeatToPassengerList(widget.seat);
                 }
                 else{
-                  myProvider.deletSeatToPassengerList(widget.passengar, widget.seat);
+                  myProvider.deletSeatFromPassengerList(widget.seat);
                 }
             },
             child: Container(

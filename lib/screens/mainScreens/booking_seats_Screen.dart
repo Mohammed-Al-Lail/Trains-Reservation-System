@@ -30,7 +30,15 @@ class bookingSeatesScreen extends StatelessWidget {
         child: Column(
           children: [
             // coustomised appbar
-            trainNameAppBar(train: train),
+            trainNameAppBar(
+              train:train,
+              onPressed: (){
+
+                Navigator.pop(context);  // close the page
+                // reset the clicked seats to the normal state => {isClicke = false}
+                Provider.of<usersProvider>(context,listen: false).resetSeatsToUnClicked();
+              },
+              ),
 
             const SizedBox(height: 40,),
           // selsect your seat text

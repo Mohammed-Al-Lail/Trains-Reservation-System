@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:trains_reservation_app_ics321_project/Services/usersProvider.dart';
 import 'package:trains_reservation_app_ics321_project/classes/Train.dart';
 import 'package:trains_reservation_app_ics321_project/utilities/bookinSeatsPageUtilities/seatCard.dart';
 
@@ -24,9 +22,9 @@ class allSeatsGridviwe extends StatelessWidget {
         ),
       itemCount: train.trainSeats.length,
        itemBuilder: (context, index) {
-         final myProvider=Provider.of<usersProvider>(context,listen: false);
+        
 
-         return seatCard(seat: train.trainSeats[index],train: train,passengar: myProvider.getPassengar!,);
+         return seatCard(seat: train.trainSeats[index],train: train);
        },
        
        

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:trains_reservation_app_ics321_project/Services/trainProvider.dart';
 import 'package:trains_reservation_app_ics321_project/Services/usersProvider.dart';
 import 'package:trains_reservation_app_ics321_project/classes/passengar.dart';
+import 'package:trains_reservation_app_ics321_project/screens/mainScreens/Tickets_Screen.dart';
 import 'package:trains_reservation_app_ics321_project/screens/mainScreens/trainsOptionsPage.dart';
 import 'package:trains_reservation_app_ics321_project/utilities/CommonUtilities/MyElevatedButton.dart';
 import 'package:trains_reservation_app_ics321_project/utilities/HomePageUtilites/MyCircularProgressIndicator.dart';
@@ -62,6 +63,10 @@ void searchButtonMethod(BuildContext ctx){
   }
 
 
+  // method to get the right page {home page or ticket page}
+
+
+
   int _bottomNavigationBarIndex=0;
 
   @override
@@ -71,12 +76,48 @@ void searchButtonMethod(BuildContext ctx){
 
       backgroundColor: Colors.blueGrey[800],
 
-      bottomNavigationBar: BottomNavigationBar( // BottomNavigationBar
-      backgroundColor: Colors.blueGrey.shade300.withOpacity(0.7),
-      
-      currentIndex: _bottomNavigationBarIndex,
 
+      // floatingActionButton {for the Home icon}
+      floatingActionButton:FloatingActionButton(
+        onPressed: (){
+          setState(() {
+            _bottomNavigationBarIndex=0;
+          });
+        },
+        backgroundColor: Colors.blueGrey.shade100,
+
+        child: Icon(
+          Icons.home,
+          size: _bottomNavigationBarIndex ==0? 35 : 25,
+          color: _bottomNavigationBarIndex ==0 ? Colors.deepPurple : Colors.black,
+        ),
+        ) ,
+
+    // floating action button position
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
+
+    // BottomNavigationBar { for log out icon, and tickets page}
+      bottomNavigationBar: BottomNavigationBar( 
+
+      backgroundColor: Colors.blueGrey.shade100,
+      fixedColor: Colors.black,
+      onTap: null,
+
+      unselectedLabelStyle: const TextStyle(
+        color: Colors.black,
+        fontSize: 16,
+        fontWeight: FontWeight.bold
+      ),
+
+      selectedLabelStyle: const TextStyle(
+        color: Colors.black,
+        fontSize: 18,
+        fontWeight: FontWeight.w900
+      ),
+      currentIndex: _bottomNavigationBarIndex,
         items:  [
+
           // log out icon
           BottomNavigationBarItem(
 
@@ -84,35 +125,68 @@ void searchButtonMethod(BuildContext ctx){
 
               onPressed: (){
 
-                setState(() {
-                  _bottomNavigationBarIndex=0;
-                });
                 Provider.of<usersProvider>(context,listen: false).resetPassengerObject(); // to reset the passenger object again to be =null
                 Navigator.pop(context);
               }, 
-              icon:  Icon(
+              icon:   Icon(
                 Icons.logout_rounded,
-                color: _bottomNavigationBarIndex ==0 ? Colors.deepPurple : Colors.black,
+                color:Colors.red.shade900,
+                size: 34,
                 )
               ),
             label: "Log-out",
+
             
             ),
 
-          // train ticket icon
+            
+
+          // Train ticket icon
           BottomNavigationBarItem(
-            icon: IconButton(
-              onPressed: (){
-                setState(() {
-                  _bottomNavigationBarIndex=1;
-                });
-                
-              }, 
-              icon:  Icon(
-                Icons.train_outlined,
-                color: _bottomNavigationBarIndex ==1 ? Colors.deepPurple : Colors.black,
+
+            icon: Stack( // we will use stack to display the tickets number
+              children: [
+
+                 IconButton(
+                onPressed: (){
+                  setState(() {
+                    _bottomNavigationBarIndex=1;
+                  });
+                  
+                }, 
+                icon:  Icon(
+                  Icons.train_outlined,
+                  color: _bottomNavigationBarIndex ==1 ? Colors.deepPurple : Colors.black,
+                  size: _bottomNavigationBarIndex ==1? 35 : 25,
+                  )
+                ),
+
+                // container that will hold the length of the ticket list
+                Visibility(
+                  visible: widget.passengar.passengarTicketsList!.isEmpty? false : true, // the container will be shown only if there was tickts on the list
+                  child: Container(
+                  
+                    height: 22, 
+                    width: 22,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.red
+                    ),
+                    child: Center(
+                      child: Text(
+                        widget.passengar.passengarTicketsList!.length.toString(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
                 )
-              ),
+              ],
+              
+            ),
             label: "Tickets",
 
             ),
@@ -121,10 +195,13 @@ void searchButtonMethod(BuildContext ctx){
         ],
       ),
 
+
+      // ----------------------------------------- Body ------------------------------
+
       body:  SafeArea(
         child: _isLoading? const MyCircularProgressIndicator()
         : 
-        SingleChildScrollView(
+        _bottomNavigationBarIndex == 0? SingleChildScrollView( //if the page index was = 0 {we will return the home page}
           scrollDirection: Axis.vertical,
         
           child: Column(
@@ -229,7 +306,9 @@ void searchButtonMethod(BuildContext ctx){
               
             ],
           ),
-        ),
+        )
+        :
+        TicketsPage(passengar: widget.passengar,) // if the page index was = 1 {we will return the Tcket page}
       ),
 
 

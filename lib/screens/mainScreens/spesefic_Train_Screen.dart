@@ -55,7 +55,12 @@ class _speseficTrainScreenState extends State<speseficTrainScreen> {
       children: [
 
          // coustomised appbar
-            trainNameAppBar(train: widget.train),
+            trainNameAppBar(
+              train: widget.train,
+              onPressed: (){
+                Navigator.pop(context);  // close the page
+              },
+              ),
             
          const SizedBox(height: 40,),
         // Trip info text

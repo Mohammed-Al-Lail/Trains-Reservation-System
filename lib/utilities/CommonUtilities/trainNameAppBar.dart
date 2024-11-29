@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:trains_reservation_app_ics321_project/classes/Train.dart';
 
+// ignore: must_be_immutable
 class trainNameAppBar extends StatelessWidget {
-  const trainNameAppBar({super.key,required this.train});
+   trainNameAppBar({super.key,required this.train, required this.onPressed});
 
   final Train train;
+  void Function()? onPressed;
+  
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -33,9 +36,7 @@ class trainNameAppBar extends StatelessWidget {
         ),
 
         leading: IconButton(
-          onPressed: (){
-            Navigator.pop(context);
-          },
+          onPressed: onPressed,
            icon:  const Icon(
             Icons.arrow_back,
             color: Colors.white,

@@ -33,7 +33,7 @@ class _totalPriceRowState extends State<totalPriceRow> {
           const SizedBox(width: 5,),
       
           Text(
-            Provider.of<usersProvider>(context,listen: true).getSeatsTotalPrice(widget.passenger).toString(),
+            Provider.of<usersProvider>(context,listen: true).getSeatsTotalPrice().toString(),
             style: const TextStyle(
               color: Colors.black,
               fontSize: 25,
