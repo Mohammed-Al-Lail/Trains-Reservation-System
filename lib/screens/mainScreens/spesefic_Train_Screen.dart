@@ -111,7 +111,7 @@ class _speseficTrainScreenState extends State<speseficTrainScreen> {
         // date
           TrainCardRowInfo(
             label: "Date",
-            value: widget.train.departureDate,
+            value: widget.train.departureDate.toLocal().toString().split(" ")[0],
 
             valueColor: Colors.white,
             labelColor: Colors.grey[400],

@@ -9,6 +9,7 @@ import 'package:trains_reservation_app_ics321_project/utilities/CommonUtilities/
 import 'package:trains_reservation_app_ics321_project/utilities/HomePageUtilites/MyCircularProgressIndicator.dart';
 import 'package:trains_reservation_app_ics321_project/utilities/HomePageUtilites/MydropDownButton.dart';
 import 'package:trains_reservation_app_ics321_project/utilities/HomePageUtilites/WelcomingMessage.dart';
+import 'package:trains_reservation_app_ics321_project/utilities/HomePageUtilites/dateContainer.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
@@ -29,12 +30,15 @@ class _HomePageState extends State<HomePage> {
   String? departureDate;
 
   String? numberOfTravelers;
+
+  DateTime? _selectedDate;
+
   bool _isLoading =false ;
 
 // method for search button 
 void searchButtonMethod(BuildContext ctx){
 
-  Provider.of<trainProvider>(ctx,listen: false).fillterTrains(originCity!, distenationCity!);
+  Provider.of<trainProvider>(ctx,listen: false).fillterTrains(originCity!, distenationCity! , _selectedDate!);
  
   Future.delayed(
     const Duration(seconds: 3),
@@ -46,6 +50,69 @@ void searchButtonMethod(BuildContext ctx){
   );
   
 }
+
+// method to pick the date
+  Future<void> selectDateMethod() async{
+
+        final DateTime? methodDate = await showDatePicker(
+
+          context: context, 
+          firstDate: DateTime.now(), 
+          lastDate: DateTime(2025,1,30),
+
+          // for design the date box (search for it later to understand this part)
+           builder: (BuildContext context, Widget? child) {
+
+              return Theme(
+                  data: ThemeData.dark().copyWith(
+                  primaryColor: Colors.blue, // Header color
+                  colorScheme: const ColorScheme.dark(primary: Colors.red), // Color scheme for selected date
+                  buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.primary), // Button colors
+                ),
+
+            child: child!,
+             );
+           }, // end of builder
+
+
+          );
+
+          if(methodDate != null && methodDate != _selectedDate){
+
+            setState(() {
+              _selectedDate=methodDate;
+            });
+          }
+
+
+  }
+
+  // Method to display error message 
+    void showErrorMessage(String errorMessage){
+
+      ScaffoldMessenger.of(context).showSnackBar(
+
+        SnackBar(
+          duration: const Duration(seconds: 3),
+          backgroundColor: Colors.red[900],
+
+          content: Center(
+            child: Text(
+              errorMessage,
+              style: const TextStyle(
+            
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          ),
+
+
+      );
+
+    }
 
 // Method to simulate a network call
   Future<void> _loadData() async {  // we used Future , in case we want to get data from the internet
@@ -199,6 +266,7 @@ void searchButtonMethod(BuildContext ctx){
       // ----------------------------------------- Body ------------------------------
 
       body:  SafeArea(
+        
         child: _isLoading? const MyCircularProgressIndicator()
         : 
         _bottomNavigationBarIndex == 0? SingleChildScrollView( //if the page index was = 0 {we will return the home page}
@@ -266,41 +334,81 @@ void searchButtonMethod(BuildContext ctx){
                     const SizedBox(height: 20,),
                     Divider( color: Colors.grey[700], thickness: 2,),
                       
+                    //Departure date text
+                      const Text(
+                      "Departure date",
+                       style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold
+                     ),
+                    ),
+                    const SizedBox(height: 2,),
                       
-                   
-                    // To select departure date 
-                    MyDropDownButton(
-                           label: "Departure Date",
-                           hintText: "Date",
-                          itemList: cityList,
-                          value: departureDate ,
-                          onChanged: (val) {
-                            setState(() {
-                              departureDate=val as String;
-                            });
-                          },
-                          
+                    // Icon to select departure date 
+                    
+                      Container(
+                        width: 50, 
+                        height: 50,
+                        decoration:  BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blueGrey,
+                          border: Border.all(
+                            color: Colors.black,
+                            width: 3
+                          )
+                        ),
+                        child: IconButton(
+                          onPressed: selectDateMethod, 
+                          icon:  Icon(
+                            Icons.date_range_outlined,
+                            color: _selectedDate== null? Colors.amber:Colors.white ,
+                            size: 28,
+                          )
                           ),
-        
-                    const SizedBox(height: 20,),
+                      ),
+                      const SizedBox(height: 2,),
+
+                      // Here we will have the selected date text if it was not null
+                        SizedBox(
+                          width: 300,
+                          child: _selectedDate != null?  // if the user select date we will display it on the screen
+                          dateContainer(
+                            date: _selectedDate!.toLocal().toString().split(" ")[0] // To obtain only the yare,month and day
+                            )
+                          : null // if the user did not select date
+                        ),
+                       
+                    const SizedBox(height: 5,),
                     Divider( color: Colors.grey[700], thickness: 2,),
         
                     // search Button
-                const Expanded(child: SizedBox()),
+                const Expanded(child: SizedBox()), // to go to the end of the container
+
                 MyElevatedButton(
                   title: "Search",
                    onPressed: (){
-                    _loadData(); // call this method first
-                    searchButtonMethod(context);
+
+                   if(originCity != null && distenationCity!=null && _selectedDate!=null){ // if the user fill all the parts
+
+                     _loadData(); // call this method first
+                     searchButtonMethod(context);
+                   }
+                   else{ // if there is some parts not completed
+                      showErrorMessage("Please fill the required information");
+                   }
+
+                    
                    }
                    ),
+
                    const SizedBox(height: 5,),
         
                   ],
                 ),
               ), // End of the container that have all the buttons
         
-              const SizedBox(height: 10,),
+      
               
           
               

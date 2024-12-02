@@ -51,7 +51,7 @@ class TicketsPage extends StatelessWidget {
         ),
 
         Text(
-          "find Your",
+          "Find Your",
           style: TextStyle(
                 color: Colors.blueGrey[200],
                 fontSize: 30,

@@ -84,7 +84,7 @@ class TrainCard extends StatelessWidget {
               
         
               // for train departue date
-                TrainCardRowInfo(label: "Date", value: train.departureDate),
+                TrainCardRowInfo(label: "Date", value: train.departureDate.toLocal().toString().split(" ")[0]),
               
         
             ],

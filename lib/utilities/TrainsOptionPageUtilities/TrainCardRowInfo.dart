@@ -7,10 +7,10 @@ class TrainCardRowInfo extends StatelessWidget {
     required this.label,
     required this.value,
     // defult values (the user can change these value)
-    this.labelColor=Colors.black,
-    this.valueColor=Colors.deepPurple,
+    this.labelColor=const Color.fromRGBO(97, 97, 97, 1),
+    this.valueColor=Colors.black,
     this.labelFontSize=12,
-    this.valueFontSize=15,
+    this.valueFontSize=18,
     });
 
   final String label;
@@ -45,7 +45,7 @@ class TrainCardRowInfo extends StatelessWidget {
             style:  TextStyle(
             fontSize: valueFontSize,
             color: valueColor,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w900,
             ),
           ),
         ],

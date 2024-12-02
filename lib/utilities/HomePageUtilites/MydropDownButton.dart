@@ -80,8 +80,8 @@ class _MyDropDownButtonState extends State<MyDropDownButton> {
                padding: const EdgeInsets.only(left: 3),
                child: Text(
                 widget.hintText,
-                style: TextStyle(
-                  color: Colors.amber[400]
+                style: const TextStyle(
+                  color: Colors.amber
                 ),
                 ),
              ),

@@ -17,7 +17,7 @@ class Train{
   final int trainID;
   final String englishTainName ;
   final String arabicTainName ;
-  String departureDate;
+  DateTime departureDate;
   String originCity;
   String destinationCity;
 

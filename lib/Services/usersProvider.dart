@@ -91,7 +91,7 @@ bool signInMethod(String email , String password){
               seatNumber: seat.seatNumber,
               trainOriginCity: train.originCity, 
               trainDestinationCity: train.destinationCity, 
-              trainDepartureDate: train.departureDate
+              trainDepartureDate: train.departureDate.toLocal().toString().split(" ")[0]
               )
 
           );

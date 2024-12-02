@@ -24,12 +24,12 @@ class trainProvider extends ChangeNotifier{
 
 
   // method to fillter the trains (for search button)
-    void fillterTrains(String originCity , String destinationCity){
+    void fillterTrains(String originCity , String destinationCity , DateTime date){
 
       _fillteredTrains.clear(); // reset the list
       
       for(Train t in _allTrainsList){
-        if(t.originCity ==originCity && t.destinationCity==destinationCity){
+        if(t.originCity ==originCity && t.destinationCity==destinationCity /*&& t.departureDate==date*/){
           if( ! _fillteredTrains.contains(t)){
               _fillteredTrains.add(t);
               notifyListeners();
@@ -38,6 +38,8 @@ class trainProvider extends ChangeNotifier{
         }
       }
     }
+
+    
 
   // method for payment button 
     void payButtonMethod(Train train){
@@ -63,7 +65,7 @@ class trainProvider extends ChangeNotifier{
     arabicTainName: "قطار 1",
     originCity: "Dammam",
     destinationCity: "Makkah",
-    departureDate: "2024 / 12 / 6"
+    departureDate: DateTime(2024,12,18) // DateTime(year,month,day)
     ),
 
     Train(
@@ -72,7 +74,7 @@ class trainProvider extends ChangeNotifier{
     arabicTainName: "قطار 2",
     originCity: "Jeddah",
     destinationCity: "Maddinah",
-    departureDate: "2024 / 12 / 9"
+    departureDate: DateTime(2024,12,20) // DateTime(year,month,day)
     ),
 
     Train(
@@ -81,47 +83,47 @@ class trainProvider extends ChangeNotifier{
     arabicTainName: "قطار 3",
     originCity: "Maddinah",
     destinationCity: "Makkah",
-    departureDate: "2024 / 12 / 7"
+    departureDate: DateTime(2024,12,11) // DateTime(year,month,day)
     ),
 
     Train(
-    trainID: 108,
+    trainID: 778,
     englishTainName: "Train 4",
     arabicTainName: "قطار4",
     originCity: "Dammam",
     destinationCity: "Makkah",
-    departureDate: "2024 / 12 / 6"
+    departureDate: DateTime(2024,12,22) // DateTime(year,month,day)
     ),
 
     Train(
-    trainID: 108,
+    trainID: 273,
     englishTainName: "Train 5",
     arabicTainName: "قطار 5",
     originCity: "Dammam",
     destinationCity: "Makkah",
-    departureDate: "2024 / 12 / 6"
+    departureDate: DateTime(2025,1,1) // DateTime(year,month,day)
     ),
 
     Train(
-    trainID: 108,
+    trainID: 901,
     englishTainName: "Train 6",
     arabicTainName: "قطار 6",
     originCity: "Dammam",
     destinationCity: "Makkah",
-    departureDate: "2024 / 12 / 6"
+    departureDate: DateTime(2025,1,5) // DateTime(year,month,day)
     ),
 
     Train(
-    trainID: 108,
+    trainID: 928,
     englishTainName: "Train 7",
     arabicTainName: "قطار 7",
     originCity: "Dammam",
     destinationCity: "Makkah",
-    departureDate: "2024 / 12 / 6"
+    departureDate: DateTime(2025,1,14) // DateTime(year,month,day)
     ),
 ];
 
-List<Train> _fillteredTrains = [];
+final List<Train> _fillteredTrains = [];
 
 
 }
