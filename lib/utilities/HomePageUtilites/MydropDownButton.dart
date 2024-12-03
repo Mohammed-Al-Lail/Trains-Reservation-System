@@ -47,7 +47,7 @@ class _MyDropDownButtonState extends State<MyDropDownButton> {
       // for drop down menue
        Container(
          height: 40,
-         width: MediaQuery.of(context).size.width*0.3, // 30% from the screen size
+         width: MediaQuery.of(context).size.width*0.2, // 30% from the screen size
          decoration: BoxDecoration(
           color: Colors.blueGrey[400],
           borderRadius: BorderRadius.circular(10),

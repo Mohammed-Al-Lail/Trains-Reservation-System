@@ -176,6 +176,7 @@ final List monthsList = [01,02,03,04,05,06,07,08,09,10,11,12];
                   cvvCode: _cardCvvController.text.toString(), 
                   showBackView: false, 
                   onCreditCardWidgetChange: (CreditCardBrand brand){},
+                  width: MediaQuery.of(context).size.width * 0.5,
           
                 // optional Arguments
                   cardBgColor: Colors.black,
@@ -219,42 +220,45 @@ final List monthsList = [01,02,03,04,05,06,07,08,09,10,11,12];
                          Padding(
                            padding: const EdgeInsets.only(left:8 , right: 8),
           
-                           child: TextFormField(
-                            controller: _cardNumController,
-                            onChanged: (value) {
-                              setState(() {  }); // updating the state after each change
-                            },
-                               keyboardType: TextInputType.number,
-                               textAlign: TextAlign.center,
-                               maxLength: 12,
-                               
-                               decoration: InputDecoration(
-                               
-                                enabledBorder: OutlineInputBorder(
-          
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide:  BorderSide(
-                                    color: _cardNumController.text.length ==12 ? Colors.grey.shade600 :Colors.red.shade800,
-                                    width: 2
-                                  )
-                                ),
-          
-                                focusedBorder: OutlineInputBorder(
-          
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide:  BorderSide(
-                                    color: _cardNumController.text.length ==12 ? Colors.grey.shade600 :Colors.red.shade800,
-                                    width: 4
-                                  )
-                                ), 
-                                
-          
-                                label: const Text("Card Number",),
-          
-                                labelStyle: TextStyle( fontSize: 18, color: Colors.grey.shade600)
-                           
-                                ),
-                                
+                           child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.5,
+                             child: TextFormField(
+                              controller: _cardNumController,
+                              onChanged: (value) {
+                                setState(() {  }); // updating the state after each change
+                              },
+                                 keyboardType: TextInputType.number,
+                                 textAlign: TextAlign.center,
+                                 maxLength: 12,
+                                 
+                                 decoration: InputDecoration(
+                                 
+                                  enabledBorder: OutlineInputBorder(
+                                       
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide:  BorderSide(
+                                      color: _cardNumController.text.length ==12 ? Colors.grey.shade600 :Colors.red.shade800,
+                                      width: 2
+                                    )
+                                  ),
+                                       
+                                  focusedBorder: OutlineInputBorder(
+                                       
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide:  BorderSide(
+                                      color: _cardNumController.text.length ==12 ? Colors.grey.shade600 :Colors.red.shade800,
+                                      width: 4
+                                    )
+                                  ), 
+                                  
+                                       
+                                  label: const Text("Card Number",),
+                                       
+                                  labelStyle: TextStyle( fontSize: 18, color: Colors.grey.shade600)
+                             
+                                  ),
+                                  
+                             ),
                            ),
                          ),
           
@@ -407,6 +411,8 @@ final List monthsList = [01,02,03,04,05,06,07,08,09,10,11,12];
                   title: "Pay",
                    onPressed: saveButtonMethod
                    ),
+
+                   const SizedBox(height: 20,),
                   
           
             ],

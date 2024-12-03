@@ -9,7 +9,7 @@ class TitleText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Padding(
-              padding: const EdgeInsets.only(left: 15 , top: 10),
+              padding:  EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.24 , top: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [

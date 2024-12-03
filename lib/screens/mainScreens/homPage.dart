@@ -170,6 +170,7 @@ void searchButtonMethod(BuildContext ctx){
       backgroundColor: Colors.blueGrey.shade100,
       fixedColor: Colors.black,
       onTap: null,
+      
 
       unselectedLabelStyle: const TextStyle(
         color: Colors.black,
@@ -284,7 +285,7 @@ void searchButtonMethod(BuildContext ctx){
               // container for searching proccess
               Container(
                 height: 300, 
-                width: MediaQuery.of(context).size.width* 0.9, // take 90% from the screen size
+                width: MediaQuery.of(context).size.width* 0.7, // take 70% from the screen size
                 
                 decoration:  BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(14)),
@@ -402,7 +403,7 @@ void searchButtonMethod(BuildContext ctx){
                    }
                    ),
 
-                   const SizedBox(height: 5,),
+                   const SizedBox(height: 25,),
         
                   ],
                 ),

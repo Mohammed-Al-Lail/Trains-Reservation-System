@@ -56,7 +56,7 @@ class _signUpPageState extends State<signUpPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 20),
+                  padding:EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.24),
                   child: Text(
                     "SIGN UP",
                     style: TextStyle(
