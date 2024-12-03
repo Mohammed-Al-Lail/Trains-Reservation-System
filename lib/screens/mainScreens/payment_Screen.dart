@@ -176,7 +176,9 @@ final List monthsList = [01,02,03,04,05,06,07,08,09,10,11,12];
                   cvvCode: _cardCvvController.text.toString(), 
                   showBackView: false, 
                   onCreditCardWidgetChange: (CreditCardBrand brand){},
-                  width: MediaQuery.of(context).size.width * 0.5,
+
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  width: MediaQuery.of(context).size.width * 0.75,
           
                 // optional Arguments
                   cardBgColor: Colors.black,

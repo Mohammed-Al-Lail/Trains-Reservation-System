@@ -285,7 +285,7 @@ void searchButtonMethod(BuildContext ctx){
               // container for searching proccess
               Container(
                 height: 300, 
-                width: MediaQuery.of(context).size.width* 0.7, // take 70% from the screen size
+                width: MediaQuery.of(context).size.width* 0.8, // take 70% from the screen size
                 
                 decoration:  BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(14)),
@@ -293,119 +293,121 @@ void searchButtonMethod(BuildContext ctx){
                 
                 ),
         
-                child: Column(
-        
-                  children: [
-        
-                    const SizedBox(height: 10,),
-        
-                    // to select origin and distenation cities
-                    Padding(
-                      padding: const EdgeInsets.only(left: 5, right: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                      // for origin city
-                          MyDropDownButton(
-                           label: "From",
-                           hintText: "Origin",
-                           itemList: cityList,
-                           value: originCity,
-                           onChanged: (val) {
-                             setState(() {
-                               originCity=val as String;
-                             });
-                           },
-                          ),
-                      // for distination city
-                          MyDropDownButton(
-                           label: "To",
-                           hintText: "Distenation",
-                          itemList: cityList,
-                          value: distenationCity,
-                          onChanged: (val) {
-                            setState(() {
-                              distenationCity=val as String;
-                            });
-                          },
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 20,),
-                    Divider( color: Colors.grey[700], thickness: 2,),
-                      
-                    //Departure date text
-                      const Text(
-                      "Departure date",
-                       style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold
-                     ),
-                    ),
-                    const SizedBox(height: 2,),
-                      
-                    // Icon to select departure date 
-                    
-                      Container(
-                        width: 50, 
-                        height: 50,
-                        decoration:  BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.blueGrey,
-                          border: Border.all(
-                            color: Colors.black,
-                            width: 3
-                          )
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                          
+                    children: [
+                          
+                      const SizedBox(height: 10,),
+                          
+                      // to select origin and distenation cities
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5, right: 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                        // for origin city
+                            MyDropDownButton(
+                             label: "From",
+                             hintText: "Origin",
+                             itemList: cityList,
+                             value: originCity,
+                             onChanged: (val) {
+                               setState(() {
+                                 originCity=val as String;
+                               });
+                             },
+                            ),
+                        // for distination city
+                            MyDropDownButton(
+                             label: "To",
+                             hintText: "Distenation",
+                            itemList: cityList,
+                            value: distenationCity,
+                            onChanged: (val) {
+                              setState(() {
+                                distenationCity=val as String;
+                              });
+                            },
+                            ),
+                          ],
                         ),
-                        child: IconButton(
-                          onPressed: selectDateMethod, 
-                          icon:  Icon(
-                            Icons.date_range_outlined,
-                            color: _selectedDate== null? Colors.amber:Colors.white ,
-                            size: 28,
-                          )
-                          ),
+                      ),
+                      const SizedBox(height: 20,),
+                      Divider( color: Colors.grey[700], thickness: 2,),
+                        
+                      //Departure date text
+                        const Text(
+                        "Departure date",
+                         style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold
+                       ),
                       ),
                       const SizedBox(height: 2,),
-
-                      // Here we will have the selected date text if it was not null
-                        SizedBox(
-                          width: 300,
-                          child: _selectedDate != null?  // if the user select date we will display it on the screen
-                          dateContainer(
-                            date: _selectedDate!.toLocal().toString().split(" ")[0] // To obtain only the yare,month and day
+                        
+                      // Icon to select departure date 
+                      
+                        Container(
+                          width: 50, 
+                          height: 50,
+                          decoration:  BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.blueGrey,
+                            border: Border.all(
+                              color: Colors.black,
+                              width: 3
                             )
-                          : null // if the user did not select date
+                          ),
+                          child: IconButton(
+                            onPressed: selectDateMethod, 
+                            icon:  Icon(
+                              Icons.date_range_outlined,
+                              color: _selectedDate== null? Colors.amber:Colors.white ,
+                              size: 28,
+                            )
+                            ),
                         ),
-                       
-                    const SizedBox(height: 5,),
-                    Divider( color: Colors.grey[700], thickness: 2,),
-        
-                    // search Button
-                const Expanded(child: SizedBox()), // to go to the end of the container
-
-                MyElevatedButton(
-                  title: "Search",
-                   onPressed: (){
-
-                   if(originCity != null && distenationCity!=null && _selectedDate!=null){ // if the user fill all the parts
-
-                     _loadData(); // call this method first
-                     searchButtonMethod(context);
-                   }
-                   else{ // if there is some parts not completed
-                      showErrorMessage("Please fill the required information");
-                   }
-
-                    
-                   }
-                   ),
-
-                   const SizedBox(height: 25,),
-        
-                  ],
+                        const SizedBox(height: 2,),
+                  
+                        // Here we will have the selected date text if it was not null
+                          SizedBox(
+                            width: 300,
+                            child: _selectedDate != null?  // if the user select date we will display it on the screen
+                            dateContainer(
+                              date: _selectedDate!.toLocal().toString().split(" ")[0] // To obtain only the yare,month and day
+                              )
+                            : null // if the user did not select date
+                          ),
+                         
+                      const SizedBox(height: 5,),
+                      Divider( color: Colors.grey[700], thickness: 2,),
+                          
+                      // search Button
+      
+                  MyElevatedButton(
+                    title: "Search",
+                     onPressed: (){
+                  
+                     if(originCity != null && distenationCity!=null && _selectedDate!=null){ // if the user fill all the parts
+                  
+                       _loadData(); // call this method first
+                       searchButtonMethod(context);
+                     }
+                     else{ // if there is some parts not completed
+                        showErrorMessage("Please fill the required information");
+                     }
+                  
+                      
+                     }
+                     ),
+                  
+                     const SizedBox(height: 25,),
+                          
+                    ],
+                  ),
                 ),
               ), // End of the container that have all the buttons
         

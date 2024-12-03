@@ -53,6 +53,7 @@ final Ticket ticket;
               labelFontSize: 18,
               valueFontSize: 22,
               ),
+              const SizedBox(height: 10,),
 
               TrainCardRowInfo(
               label: "To", 

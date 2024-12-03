@@ -46,7 +46,7 @@ late final bool _isObsecure = widget.obscureText ;  // this variabl will be used
             padding: const EdgeInsets.all(15.0),
 
             child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.5, // let the width of the TextField = 50 % from the screen size,
+              width: 330, // let the width of the TextField = 50 % from the screen size,
               child: TextField(
                 controller: widget.controller ,
                 obscureText: widget.obscureText,
