@@ -27,8 +27,6 @@ class _HomePageState extends State<HomePage> {
 
   String? distenationCity;
 
-  String? departureDate;
-
   String? numberOfTravelers;
 
   DateTime? _selectedDate;

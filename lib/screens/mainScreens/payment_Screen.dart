@@ -80,6 +80,8 @@ final List monthsList = [01,02,03,04,05,06,07,08,09,10,11,12];
              
       );
       Provider.of<trainProvider>(context,listen: false).payButtonMethod(widget.train);
+      Provider.of<trainProvider>(context,listen: false).addPassengerToTheList(widget.train,context);
+      
       Provider.of<usersProvider>(context,listen: false).createTickets(widget.train);
       Provider.of<usersProvider>(context,listen: false).resetPassengarSeatsList();
 

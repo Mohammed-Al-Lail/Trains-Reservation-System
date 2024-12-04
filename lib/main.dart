@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:trains_reservation_app_ics321_project/Services/adminProvider.dart';
 import 'package:trains_reservation_app_ics321_project/Services/trainProvider.dart';
 import 'package:trains_reservation_app_ics321_project/Services/usersProvider.dart';
+import 'package:trains_reservation_app_ics321_project/screens/AdminsScreens/AdminHomePage.dart';
 import 'package:trains_reservation_app_ics321_project/screens/LogInScreen/signin.dart';
 
 void main() {
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
 
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SigninPage() 
+        home: AdminHomePage()//SigninPage() 
       ),
     );
   }

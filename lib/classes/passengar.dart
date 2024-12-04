@@ -1,22 +1,19 @@
 import 'package:trains_reservation_app_ics321_project/classes/Ticket.dart';
 import 'package:trains_reservation_app_ics321_project/classes/seat.dart';
+import 'package:trains_reservation_app_ics321_project/classes/user.dart';
 
-class Passengar {
+class Passengar extends User{
 
-Passengar({
-  required this.fName, 
-  required this.lName,
-  required this.email,
-  required this.passowrd,
-  this. age
+Passengar({ // we will take the same parameters from the suber class
+  required super.fName, 
+  required super.lName,
+  required super.email,
+  required super.passowrd,
+  String? age
 });
 
 
-  final String fName ;
-  final String lName;
-  final String email;
-  final String passowrd;
-  String? age;
+  
   List<Ticket>? passengarTicketsList =[];
   List<Seat> passengarSeatsList = [];
 

@@ -23,10 +23,9 @@ class Train{
 
   
 
-  List<Passengar> passengarsList=[];
+  List<Passengar> _passengarsList=[];
 
-
-  List<Seat> trainSeats = [ // each train will have fixed number of seats from the begining
+  final List<Seat> trainSeats = [ // each train will have fixed number of seats from the begining {every time we creat new train object , by defult it will have this seats list}
 
     Seat(
       seatNumber: "1",
@@ -120,6 +119,13 @@ class Train{
   ];
 
 
+// method to add passengar to the train passengar list
+  void addPassenger(Passengar p){
+
+    if(! _passengarsList.contains(p)){
+      _passengarsList.add(p);
+    }
+  }
   
 }
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:trains_reservation_app_ics321_project/Services/usersProvider.dart';
 import 'package:trains_reservation_app_ics321_project/classes/Train.dart';
 import 'package:trains_reservation_app_ics321_project/classes/seat.dart';
 
@@ -49,6 +51,30 @@ class trainProvider extends ChangeNotifier{
             seat.isReseived =true;
         }
       }
+    }
+
+  // method to add the passenger to the trainPassenger list { for the train}
+    void addPassengerToTheList(Train train , BuildContext ctx){
+      
+      final userProvider = Provider.of<usersProvider>(ctx,listen: false);
+      train.addPassenger(userProvider.getPassengar!);
+      
+    }
+
+
+  // method to add new train to the system {it will be used by the admins only}
+    bool addNewTrain(Train train){
+
+      
+      for(Train t in _allTrainsList){ // check there is no duplicate id trains
+        if (t.trainID==train.trainID) {return false;} //if there is duplicted ID return false and go out the method
+      }
+
+      _allTrainsList.add(train); // else , if there is no duplicated id , add the new train
+      notifyListeners();
+      return true; // return true
+
+
     }
 
   // getters
