@@ -25,7 +25,7 @@ class passengarSeatsGridviwe extends StatelessWidget {
           return  AlertDialog(
             backgroundColor: Colors.blueGrey[100],
             title:  Text(
-              "Are You Sure From Removing This seat\nFrom ${passengar.fName} ${passengar.lName}?",
+              "Are You Sure From\nRemoving Seat ${seat.seatNumber}\nFrom ${passengar.fName} ${passengar.lName}?",
               style: const TextStyle(
                 fontWeight: FontWeight.w900
               ),
@@ -39,11 +39,33 @@ class passengarSeatsGridviwe extends StatelessWidget {
               ElevatedButton(
                 onPressed: (){
                   Provider.of<AdminProvider>(context,listen: false).deletSeat(seat, passengar);
+                  Navigator.pop(context);
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    
+                     SnackBar(
+                      backgroundColor: Colors.green[900],
+                      duration: const Duration(seconds: 3),
+                      content: const Center(
+                        child: Text(
+                          "The seat was deleated Successfully",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 20
+                          ),
+                          ),
+                      )
+                    )
+                  );
+
+
+                  
 
                   if(passengar.passengarTicketsList!.isEmpty){ // if we delet all the tickets assosiated with the train
                     train.passengarsList.remove(passengar);
                   }
-                  Navigator.pop(ctx);
+                  
                 },
 
                 style:  ButtonStyle(
