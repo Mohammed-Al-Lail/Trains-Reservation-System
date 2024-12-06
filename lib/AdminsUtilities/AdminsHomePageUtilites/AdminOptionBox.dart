@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 
 class optionBox extends StatelessWidget {
-  const optionBox({super.key,required this.title,required this.onTap});
+  const optionBox({super.key,required this.numberOfOption,required this.title,required this.onTap});
 
+  final int numberOfOption;
   final String title;
   final void Function()? onTap;
   @override
@@ -13,28 +14,36 @@ class optionBox extends StatelessWidget {
       onTap: onTap,
 
       child: Padding(
-        padding: const EdgeInsets.only(top: 30 , bottom: 30),
-        child: Column(
-         crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-        
-            Center(
-              child: Text(
+        padding: const EdgeInsets.all(30),
+
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: const Color.fromRGBO(255, 236, 179, 1),
+              width: 3
+            )
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+              "$numberOfOption- ",
+              style: TextStyle(
+                color: Colors.amber[100],
+                fontSize: 26,
+                fontWeight: FontWeight.w700
+              ),
+            ),
+              Text(
                 title,
                 style: TextStyle(
                   color: Colors.amber[100],
-                  fontSize: 20,
+                  fontSize: 22,
                   fontWeight: FontWeight.w700
                 ),
               ),
-            ),
-            Divider(
-              color: Colors.amber[100],
-              thickness: 1.5,
-              indent: MediaQuery.of(context).size.width* 0.3,
-              endIndent: MediaQuery.of(context).size.width* 0.3,
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );

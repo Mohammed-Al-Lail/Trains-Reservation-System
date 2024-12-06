@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:trains_reservation_app_ics321_project/Services/adminProvider.dart';
 import 'package:trains_reservation_app_ics321_project/Services/usersProvider.dart';
+import 'package:trains_reservation_app_ics321_project/classes/admin.dart';
 import 'package:trains_reservation_app_ics321_project/classes/passengar.dart';
+import 'package:trains_reservation_app_ics321_project/screens/AdminsScreens/AdminHomePage.dart';
 import 'package:trains_reservation_app_ics321_project/screens/LogInScreen/signup.dart';
 import 'package:trains_reservation_app_ics321_project/screens/mainScreens/homPage.dart';
 import 'package:trains_reservation_app_ics321_project/utilities/loginPageUtilites/TitleText.dart';
@@ -26,7 +29,10 @@ class _SigninPageState extends State<SigninPage> {
 
   // method for loginButton 
   void logInButtonMethod(){
-    if(Provider.of<usersProvider>(context,listen: false).signInMethod(userNameController.text, passowrdController.text)){ // if the passowrd and email correct
+    final userProvider = Provider.of<usersProvider>(context,listen: false);
+    final adminProvide=Provider.of<AdminProvider>(context,listen: false);
+
+    if(userProvider.signInMethod(userNameController.text, passowrdController.text)){ // if the passowrd and email correct
       
       ScaffoldMessenger.of(context).showSnackBar(
 
@@ -66,8 +72,47 @@ class _SigninPageState extends State<SigninPage> {
     }
 
 
+// if the user was admin chick the list
+    else if(adminProvide.signInMethod(userNameController.text, passowrdController.text)){
 
-    else{ // show error meassage 
+          ScaffoldMessenger.of(context).showSnackBar(
+
+        SnackBar(
+          backgroundColor: Colors.green[700]?.withOpacity(0.6),
+          duration: const Duration(seconds: 2), // remaining for 2 seconds, then desaper
+
+          content: const SizedBox( // we will use size box to controll the size of the snackBar
+            height: 30,
+
+            child: Center(
+
+              child: Text(
+                "Sign In Successfully",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          )
+          )
+      );
+
+      Admin admin =adminProvide.allAdminsMap[userNameController.text]!; // do not forget to add (!) since we sure this passengar exist 
+
+      userNameController.clear(); //reset the value again
+      passowrdController.clear(); //reset the value again
+      
+      Future.delayed( // after 3 seconds go to the home page ( if the info was correct)
+         const Duration(seconds: 3),
+        ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=> AdminHomePage(admin: admin)))
+      );
+    }
+
+
+
+    else{ // show error meassage {if not correct admin or correct passengar}
 
       ScaffoldMessenger.of(context).showSnackBar(
 

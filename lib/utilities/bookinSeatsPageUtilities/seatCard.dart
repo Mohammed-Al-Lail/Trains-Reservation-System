@@ -2,14 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:trains_reservation_app_ics321_project/Services/usersProvider.dart';
 import 'package:trains_reservation_app_ics321_project/classes/Train.dart';
+import 'package:trains_reservation_app_ics321_project/classes/admin.dart';
 import 'package:trains_reservation_app_ics321_project/classes/seat.dart';
+import 'package:trains_reservation_app_ics321_project/classes/user.dart';
 
 // ignore: must_be_immutable
 class seatCard extends StatefulWidget {
-   seatCard({super.key, required this.train,required this.seat,});
+   seatCard({
+    super.key, 
+    required this.user,
+    required this.train,
+    required this.seat,
+    this.onDoubleTap
+    
+    });
 
+  final User user;
   Train train;
   Seat seat;
+  void Function()? onDoubleTap;
+
 
   
 
@@ -23,6 +35,8 @@ class _seatCardState extends State<seatCard> {
 
   @override
   Widget build(BuildContext context) {
+   
+     final userProvider = Provider.of<usersProvider>(context,listen: false); // get instance from the user provider
 
     return Column(
 
@@ -32,21 +46,29 @@ class _seatCardState extends State<seatCard> {
           padding: const EdgeInsets.all(10),
         
           child: GestureDetector(
+
             onTap:  widget.seat.isReseived!? null // if the seat was reseirved already
             :
             () { // if the seat was not resirved
-            final myProvider = Provider.of<usersProvider>(context,listen: false); // get instance from the user provider
+           
 
               setState(() {
                 widget.seat.isClicked=!widget.seat.isClicked!; // change the state of isClicked
               });
               if(widget.seat.isClicked!){// since each seat  will have a defult value for isClicked, which is false, because of that we add (!) at the end, (which mean we sure it will not be null) 
-                myProvider.addSeatToPassengerList(widget.seat);
+                userProvider.addSeatToPassengerList(widget.seat);
                 }
                 else{
-                  myProvider.deletSeatFromPassengerList(widget.seat);
+                  userProvider.deletSeatFromPassengerList(widget.seat);
                 }
             },
+
+            onDoubleTap:(){ // this method will be only used by the admins
+              widget.user is Admin? 
+              widget.onDoubleTap!() // call back function
+              :
+              null; // if the user was not admin, the function will not work
+            } ,
             child: Container(
             
               width: 50,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:trains_reservation_app_ics321_project/Services/trainProvider.dart';
+import 'package:trains_reservation_app_ics321_project/Services/usersProvider.dart';
 import 'package:trains_reservation_app_ics321_project/utilities/CommonUtilities/MyGridviwe.dart';
 import 'package:trains_reservation_app_ics321_project/utilities/TrainsOptionPageUtilities/noTrainsAvailableText.dart';
 
@@ -11,6 +12,8 @@ class TrainsOptionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final trainsProvider = Provider.of<trainProvider>(context,listen: false);
+    final userProvider = Provider.of<usersProvider>(context,listen: false);
     return Scaffold(
 
       backgroundColor: Colors.blueGrey[800],
@@ -45,7 +48,7 @@ class TrainsOptionsPage extends StatelessWidget {
 
       :  // second option (if there is available trains) 
       
-      MyGridviwe(trainList: Provider.of<trainProvider>(context,listen: false).fillteredTrains)
+      MyGridviwe(trainList: trainsProvider.fillteredTrains,user: userProvider.getPassengar!,)
       
 
     );

@@ -48,7 +48,10 @@ bool signInMethod(String email , String password){
     int getSeatsTotalPrice(){
       int totalPrice =0;
       for(Seat seat in _passengar!.passengarSeatsList){
-        totalPrice+= seat.seatPrice;
+        if(!seat.isReseived!){
+          totalPrice+= seat.seatPrice;
+        }
+        
         //notifyListeners();
       }
       return totalPrice;

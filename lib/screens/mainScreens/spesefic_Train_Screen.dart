@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:trains_reservation_app_ics321_project/classes/Train.dart';
+import 'package:trains_reservation_app_ics321_project/classes/passengar.dart';
+import 'package:trains_reservation_app_ics321_project/classes/user.dart';
+import 'package:trains_reservation_app_ics321_project/screens/AdminsScreens/trainsAdminsOptionPage.dart';
 import 'package:trains_reservation_app_ics321_project/screens/mainScreens/booking_seats_Screen.dart';
 import 'package:trains_reservation_app_ics321_project/utilities/CommonUtilities/MyElevatedButton.dart';
 import 'package:trains_reservation_app_ics321_project/utilities/CommonUtilities/trainNameAppBar.dart';
@@ -7,10 +10,11 @@ import 'package:trains_reservation_app_ics321_project/utilities/HomePageUtilites
 import 'package:trains_reservation_app_ics321_project/utilities/TrainsOptionPageUtilities/TrainCardRowInfo.dart';
 
 class speseficTrainScreen extends StatefulWidget {
-   speseficTrainScreen({super.key,required this.train});
+   speseficTrainScreen({super.key,required this.train,required this.user});
 
 
   final Train train;  // we must bass a train object to this class
+  final User user;
 
   
 
@@ -36,8 +40,11 @@ class _speseficTrainScreenState extends State<speseficTrainScreen> {
       _isLoading = false; // Set loading state to false after 7 seconds to close the indicator
     });
 
-  // after finithing loading, go to the next page =>(bookingSeatesScreen)
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>bookingSeatesScreen(train: widget.train,)));
+  // after finithing loading, go to the next page =>(bookingSeatesScreen) or (trainAdminsOptionsPage)
+    widget.user is Passengar? // check if the user was Passenger or admin
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>bookingSeatesScreen(train: widget.train,)))
+    :
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>trainAdminsOptionsPage(train: widget.train,)));
   }
 
 
@@ -124,14 +131,26 @@ class _speseficTrainScreenState extends State<speseficTrainScreen> {
              const SizedBox(height: 40,),
              
 
-        // Book seats Button
+
+        widget.user is Passengar?
+        // Book seats Button {for passengars}
           MyElevatedButton(
             title: "Book Seats",
              onPressed: (){
-              _loadData(); // this method will wait for some seconds before going to (bookingSeatesScreen) page
+              _loadData(); // this method will wait for some seconds before going to (bookingSeatesScreen) page for passengars
               
              }
-             ),
+             )
+             :
+             // Options Button {for admins}
+          MyElevatedButton(
+            title: "Options",
+             onPressed: (){
+              _loadData(); // this method will wait for some seconds before going to (trainAdminsOptionsPage) page for admins
+             }
+              
+             )
+
       ],
     ),
 

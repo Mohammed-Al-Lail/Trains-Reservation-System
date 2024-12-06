@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:trains_reservation_app_ics321_project/Services/usersProvider.dart';
 import 'package:trains_reservation_app_ics321_project/classes/Train.dart';
 import 'package:trains_reservation_app_ics321_project/utilities/bookinSeatsPageUtilities/seatCard.dart';
 
@@ -9,6 +11,7 @@ class allSeatsGridviwe extends StatelessWidget {
  
   @override
   Widget build(BuildContext context) {
+    final userProvider= Provider.of<usersProvider>(context,listen: false);
 
     return GridView.builder(
 
@@ -24,7 +27,7 @@ class allSeatsGridviwe extends StatelessWidget {
        itemBuilder: (context, index) {
         
 
-         return seatCard(seat: train.trainSeats[index],train: train);
+         return seatCard(user:userProvider.getPassengar! ,seat: train.trainSeats[index],train: train);
        },
        
        

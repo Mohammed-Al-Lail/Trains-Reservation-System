@@ -22,9 +22,10 @@ class Train{
   String destinationCity;
 
   
-
+// Data
   List<Passengar> _passengarsList=[];
 
+  
   final List<Seat> trainSeats = [ // each train will have fixed number of seats from the begining {every time we creat new train object , by defult it will have this seats list}
 
     Seat(
@@ -118,6 +119,9 @@ class Train{
 
   ];
 
+// geters
+  List<Passengar> get passengarsList => _passengarsList;
+
 
 // method to add passengar to the train passengar list
   void addPassenger(Passengar p){
@@ -126,6 +130,7 @@ class Train{
       _passengarsList.add(p);
     }
   }
+
   
 }
 

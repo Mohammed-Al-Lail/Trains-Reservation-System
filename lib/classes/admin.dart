@@ -11,6 +11,11 @@ Admin({
   String? age
 });
 
+  @override
+  String objectType() {
+    return "Admin".toLowerCase();
+  }
+
 
 
 }

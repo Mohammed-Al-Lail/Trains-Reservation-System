@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:trains_reservation_app_ics321_project/classes/Train.dart';
+import 'package:trains_reservation_app_ics321_project/classes/user.dart';
 import 'package:trains_reservation_app_ics321_project/screens/mainScreens/spesefic_Train_Screen.dart';
 import 'package:trains_reservation_app_ics321_project/utilities/TrainsOptionPageUtilities/TrainCardRowInfo.dart';
 
 class TrainCard extends StatelessWidget {
-  const TrainCard({super.key, required this.train});
+  const TrainCard({super.key, required this.train,required this.user});
 
   final Train train;
+  final User user;
   @override
   Widget build(BuildContext context) {
 
@@ -15,7 +17,7 @@ class TrainCard extends StatelessWidget {
 
       child: GestureDetector(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>speseficTrainScreen(train: train)));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>speseficTrainScreen(train: train, user:user,)));
         },
         child: Container(
         

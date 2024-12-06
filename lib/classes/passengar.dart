@@ -16,5 +16,10 @@ Passengar({ // we will take the same parameters from the suber class
   
   List<Ticket>? passengarTicketsList =[];
   List<Seat> passengarSeatsList = [];
+  
+  @override
+  String objectType() {
+    return "Passengar".toLowerCase();
+  }
 
 }

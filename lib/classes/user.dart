@@ -14,4 +14,8 @@ abstract class User {
   final String email;
   final String passowrd;
   String? age;
+
+
+
+   String objectType() ;
 }
