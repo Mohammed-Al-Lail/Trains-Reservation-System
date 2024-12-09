@@ -42,9 +42,9 @@ class _speseficTrainScreenState extends State<speseficTrainScreen> {
 
   // after finithing loading, go to the next page =>(bookingSeatesScreen) or (trainAdminsOptionsPage)
     widget.user is Passengar? // check if the user was Passenger or admin
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>bookingSeatesScreen(train: widget.train,)))
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>bookingSeatesScreen(train: widget.train,))) // {if passengar}
     :
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>trainAdminsOptionsPage(train: widget.train,)));
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>trainAdminsOptionsPage(train: widget.train,))); // {if admin}
   }
 
 
@@ -129,6 +129,22 @@ class _speseficTrainScreenState extends State<speseficTrainScreen> {
              ),
              Divider(color: Colors.yellow[100],thickness: 1),
              const SizedBox(height: 40,),
+
+
+        // Driver Name 
+          TrainCardRowInfo(
+            label: "Driver Name",
+            value: widget.train.drivarName ?? "No Driver was Assigned ", // if the  widget.train.drivarName != null , {we will get the driver name } else {we will get the defult value } that we provide {which come after the ?? }
+
+            valueColor: Colors.white,
+            labelColor: Colors.grey[400],
+
+            valueFontSize: 25,
+            labelFontSize: 18,
+
+             ),
+             Divider(color: Colors.yellow[100],thickness: 1),
+             const SizedBox(height: 20,),
              
 
 

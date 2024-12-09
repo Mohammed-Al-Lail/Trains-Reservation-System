@@ -4,6 +4,7 @@ import 'package:trains_reservation_app_ics321_project/Services/adminProvider.dar
 import 'package:trains_reservation_app_ics321_project/classes/Train.dart';
 import 'package:trains_reservation_app_ics321_project/classes/passengar.dart';
 import 'package:trains_reservation_app_ics321_project/classes/seat.dart';
+import 'package:trains_reservation_app_ics321_project/screens/AdminsScreens/AdminHomePage.dart';
 import 'package:trains_reservation_app_ics321_project/utilities/bookinSeatsPageUtilities/seatCard.dart';
 
 class passengarSeatsGridviwe extends StatelessWidget {
@@ -20,7 +21,7 @@ class passengarSeatsGridviwe extends StatelessWidget {
 
       showDialog(
         context: ctx, 
-        builder: (context) {
+        builder: (ctx) {
           
           return  AlertDialog(
             backgroundColor: Colors.blueGrey[100],
@@ -38,10 +39,11 @@ class passengarSeatsGridviwe extends StatelessWidget {
               // yes button
               ElevatedButton(
                 onPressed: (){
-                  Provider.of<AdminProvider>(context,listen: false).deletSeat(seat, passengar);
-                  Navigator.pop(context);
+                  Provider.of<AdminProvider>(ctx,listen: false).deletSeat(seat, passengar);
+                  
+                  
 
-                  ScaffoldMessenger.of(context).showSnackBar(
+                  ScaffoldMessenger.of(ctx).showSnackBar(
                     
                      SnackBar(
                       backgroundColor: Colors.green[900],
@@ -57,6 +59,19 @@ class passengarSeatsGridviwe extends StatelessWidget {
                           ),
                       )
                     )
+                  );
+
+                  Future.delayed(
+                    const Duration(seconds: 3),
+                    (){
+                      Navigator.pushAndRemoveUntil(
+                    ctx, 
+                    MaterialPageRoute(builder: (context)=>AdminHomePage(admin: Provider.of<AdminProvider>(context).getAdmin!)), 
+                    (route) {
+                       return route.isFirst ; 
+                    },
+                  );
+                    }
                   );
 
 

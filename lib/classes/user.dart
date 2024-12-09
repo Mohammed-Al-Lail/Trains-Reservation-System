@@ -17,5 +17,5 @@ abstract class User {
 
 
 
-   String objectType() ;
+   String objectType() ; // absrtact methode {must be implemented by the sub classes }
 }

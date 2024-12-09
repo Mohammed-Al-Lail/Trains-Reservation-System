@@ -11,6 +11,7 @@ class Train{
     required this.originCity,
     required this.destinationCity, 
     required this.departureDate,
+    this.drivarName
    
   });
   // class fields
@@ -20,10 +21,12 @@ class Train{
   DateTime departureDate;
   String originCity;
   String destinationCity;
+  
+  String? drivarName;
 
   
 // Data
-  List<Passengar> _passengarsList=[];
+  final List<Passengar> _passengarsList=[];
 
   
   final List<Seat> trainSeats = [ // each train will have fixed number of seats from the begining {every time we creat new train object , by defult it will have this seats list}
@@ -129,6 +132,36 @@ class Train{
     if(! _passengarsList.contains(p)){
       _passengarsList.add(p);
     }
+  }
+
+
+  // method to add driver name to the train 
+    void addDriver(String name){
+      drivarName = name;
+    }
+
+ // method to remove driver 
+  void deletDriver(){
+    drivarName=null ;
+  }
+
+
+// method to find the Average load factor
+  String getAverageLoadFactor(){
+    double occupiedSeats=0;
+    double totalSeats=16;
+
+
+    for (Seat seat in trainSeats){
+      if(seat.isReseived!){
+        occupiedSeats++;
+      }
+    } 
+
+    double avgLoadFactor =  (occupiedSeats / totalSeats) * 100 ;
+    return "$avgLoadFactor %";
+
+
   }
 
   
